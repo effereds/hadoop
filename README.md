@@ -1,4 +1,4 @@
-# A simple Apache Hadoop 3.1.2 Docker image
+# A simple Apache Hadoop 3.1.4 Docker image
 
 This is a very simple and not optimized Docker image containing Apache Hadoop. 
 

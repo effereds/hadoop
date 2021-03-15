@@ -1,4 +1,4 @@
-# Creates pseudo distributed hadoop 3.1.2
+# Creates pseudo distributed hadoop 3.1.4
 #
 # docker build -t effeerre/hadoop .
 
@@ -7,7 +7,7 @@ USER root
 
 # install dev tools
 RUN apt-get update
-RUN apt-get install -y curl tar sudo openssh-server rsync default-jre vim net-tools
+RUN apt-get install -y curl tar sudo openssh-server rsync openjdk-8-jre-headless vim net-tools
 
 # passwordless ssh
 RUN ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa 
@@ -18,8 +18,9 @@ ENV JAVA_HOME /usr/lib/jvm/default-java
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # # hadoop
-RUN wget http://mirror.nohup.it/apache/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz ; tar -zxf hadoop-3.1.2.tar.gz -C /usr/local/ ; rm hadoop-3.1.2.tar.gz
-RUN cd /usr/local && ln -s ./hadoop-3.1.2 hadoop
+RUN wget https://downloads.apache.org/hadoop/common/hadoop-3.1.4/hadoop-3.1.4.tar.gz ; tar -zxf hadoop-3.1.4.tar.gz -C /usr/local/ ; rm hadoop-3.1.4.tar.gz
+RUN cd /usr/local && ln -s ./hadoop-3.1.4 hadoop
+
 
 # 
 ENV HADOOP_COMMON_HOME /usr/local/hadoop
@@ -55,7 +56,7 @@ ENV BOOTSTRAP /usr/local/bootstrap.sh
 CMD /usr/local/bootstrap.sh
 
 # # Hdfs ports
-EXPOSE 9866 9867 9870 9864 9868 9820 9000
+EXPOSE 9866 9867 9870 9864 9868 9820 9000 54310
 # # Mapred ports
 # EXPOSE 10020 19888
 # #Yarn ports
